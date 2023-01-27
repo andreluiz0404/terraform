@@ -15,9 +15,9 @@ variable "do_token" {
   default = ""
 }
 
-variable "region" { }
+variable "region" {}
 
-variable "ssh_key_name" { }
+variable "ssh_key_name" {}
 
 data "digitalocean_ssh_key" "ssh_key" {
   name = var.ssh_key_name
@@ -47,10 +47,10 @@ resource "digitalocean_kubernetes_cluster" "k8s" {
 
 # Cria o resource local_file
 resource "local_file" "kube_config" {
-  content = digitalocean_kubernetes_cluster.k8s.kube_config.0.raw_config
+  content  = digitalocean_kubernetes_cluster.k8s.kube_config.0.raw_config
   filename = "kube_config.yaml"
 }
 
 output "jenkins_ip" {
-	value = digitalocean_droplet.jenkins.ipv4_address
+  value = digitalocean_droplet.jenkins.ipv4_address
 }
